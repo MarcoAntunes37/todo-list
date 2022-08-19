@@ -8,7 +8,7 @@ require('dotenv').config()
 const app = express();
 
 var corsOptions = {
-  origin: "https://todo-list-j4cmm25dx-marcoantunes37.vercel.app"
+  origin: "*"
 };
 
 app.use(express.json());
