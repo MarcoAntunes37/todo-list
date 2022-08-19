@@ -9,7 +9,7 @@ export default function TodoList() {
       async () => {        
             const response = await fetch(url, {
               method: 'get',
-              headers: {'Access-Control-Allow-Origin': '*'}
+              headers: {'Access-Control-Allow-Origin': 'https://todo-list-marcoantunes37.vercel.app'}
             })
             const responseJSON = await response.json();
             setTask(responseJSON)

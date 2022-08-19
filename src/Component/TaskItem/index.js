@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react'
 import './taskitem.css'
 
 export default function TaskItem(props) {
-    const url = 'http://localhost:8090/api/lists/'
+    const url = 'https://todo-list-api-marcoantunes37.vercel.app/api/lists/'
     const [toggle, setToggle] = useState(true)
     const {_id, title, description, startTime, endTime, done} = props.item
     const [changes, setChanges] = useState([])
@@ -43,7 +43,7 @@ export default function TaskItem(props) {
                 headers: {
                     "Content-Type": "application/json",
                     "x-access-token": "token-value",
-                    "Access-Control-Allow-Origin": "*"
+                    'Access-Control-Allow-Origin': 'https://todo-list-marcoantunes37.vercel.app'
                 }
             })
             if(!res.ok){
@@ -64,7 +64,7 @@ export default function TaskItem(props) {
                 headers: {
                     "Content-Type": "application/json",
                     "x-access-token": "token-value",
-                    "Access-Control-Allow-Origin": "*"
+                    'Access-Control-Allow-Origin': 'https://todo-list-marcoantunes37.vercel.app'
                 },
                 body: JSON.stringify(changes)
             });
