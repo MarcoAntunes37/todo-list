@@ -30,7 +30,7 @@ export default function Form() {
                 headers: {
                     "Content-Type": "application/json",
                     "x-access-token": "token-value",
-                    'Access-Control-Allow-Origin': 'https://todo-list-marcoantunes37.vercel.app'
+                    
                 },
                 body: JSON.stringify(taskData)
             });

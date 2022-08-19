@@ -42,8 +42,7 @@ export default function TaskItem(props) {
                 method: 'delete',
                 headers: {
                     "Content-Type": "application/json",
-                    "x-access-token": "token-value",
-                    'Access-Control-Allow-Origin': 'https://todo-list-marcoantunes37.vercel.app'
+                    "x-access-token": "token-value"
                 }
             })
             if(!res.ok){
@@ -63,8 +62,7 @@ export default function TaskItem(props) {
                 method: 'put',
                 headers: {
                     "Content-Type": "application/json",
-                    "x-access-token": "token-value",
-                    'Access-Control-Allow-Origin': 'https://todo-list-marcoantunes37.vercel.app'
+                    "x-access-token": "token-value"
                 },
                 body: JSON.stringify(changes)
             });
