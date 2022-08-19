@@ -1,0 +1,19 @@
+.form-container{
+    display: flex;
+    justify-content: center;
+    margin: 0.5em 1em 0.5em 1em;
+    background-color: #e5e5e5;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+}
+
+.form-item{
+    margin: 0 1em 0 1em
+}
+
+.form-item p {
+    font-size: calc(6px + 2vmin);
+}

@@ -1,6 +1,9 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+First step: Clone repository
+Second step: Use npm to install dependencies
+Third step: Create a .env with enviroment variables or replace connection string on server.js to
+you database connection
 
 ## Available Scripts
 

@@ -1,0 +1,20 @@
+.item-content{
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+}
+
+.item-done, .item-title, .item-description, .item-date, .item-start, .item-end{
+    font-size: calc(8px + 2vmin);
+    margin: 0 1em 0 1rem
+}
+
+.button-save{
+    background-color: green;
+    color: white;
+}
+
+.button-delete{
+    background-color: red;
+    color: white
+}
