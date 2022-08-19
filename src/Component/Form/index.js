@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react'
 import './form.css'
 
 export default function Form() {    
-    const url = 'https://todo-list-api-snowy.vercel.app/api/lists/new'
+    const url = 'http://localhost:8090/api/lists/new'
     const form = useRef(null)
     const title = useRef(null)
     const description = useRef(null)

@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react'
 import './taskitem.css'
 
 export default function TaskItem(props) {
-    const url = 'https://todo-list-api-snowy.vercel.app/api/lists/'
+    const url = 'http://localhost:8090/api/lists/'
     const [toggle, setToggle] = useState(true)
     const {_id, title, description, startTime, endTime, done} = props.item
     const [changes, setChanges] = useState([])
