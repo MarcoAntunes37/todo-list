@@ -8,7 +8,7 @@ require('dotenv').config()
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: "https://todo-list-j4cmm25dx-marcoantunes37.vercel.app"
 };
 
 app.use(express.json());
@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors(corsOptions));
 
-const URI = process.env.URI
+const URI = process.env.DB_URI
 
 mongoose.connect(URI,
   {
