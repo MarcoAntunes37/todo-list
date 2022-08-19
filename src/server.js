@@ -17,10 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors(corsOptions));
 
-const DB_USER = process.env.DB_USER
-const DB_PASSWORD = process.env.DB_PASSWORD
+const URI = process.env.URI
 
-mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.dmbpu.mongodb.net/?retryWrites=true&w=majority`,
+mongoose.connect(URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
