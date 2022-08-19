@@ -42,7 +42,8 @@ export default function TaskItem(props) {
                 method: 'delete',
                 headers: {
                     "Content-Type": "application/json",
-                    "x-access-token": "token-value"
+                    "x-access-token": "token-value",
+                    "Access-Control-Allow-Origin": "*"
                 }
             })
             if(!res.ok){
@@ -62,7 +63,8 @@ export default function TaskItem(props) {
                 method: 'put',
                 headers: {
                     "Content-Type": "application/json",
-                    "x-access-token": "token-value"
+                    "x-access-token": "token-value",
+                    "Access-Control-Allow-Origin": "*"
                 },
                 body: JSON.stringify(changes)
             });

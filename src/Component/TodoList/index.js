@@ -7,7 +7,10 @@ export default function TodoList() {
     
     const getAllTasks = useCallback(
       async () => {        
-            const response = await fetch(url)
+            const response = await fetch(url, {
+              method: 'get',
+              headers: {'Access-Control-Allow-Origin': '*'}
+            })
             const responseJSON = await response.json();
             setTask(responseJSON)
             return responseJSON
