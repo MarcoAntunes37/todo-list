@@ -2,7 +2,7 @@ import React, {useEffect, useState, useCallback} from 'react'
 import TaskItem from '../TaskItem'
 
 export default function TodoList() {
-    const url = 'http://localhost:8090/api/lists'  
+    const url = 'https://todo-list-api-snowy.vercel.app/api/lists/'
     const [task, setTask] = useState([])
     
     
