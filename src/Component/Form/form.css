@@ -1,19 +1,28 @@
 .form-container{
     display: flex;
-    justify-content: center;
-    margin: 0.5em 1em 0.5em 1em;
-    background-color: #e5e5e5;
 }
 
 .form{
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .form-item{
-    margin: 0 1em 0 1em
+    margin: 0 1em 0 1em;
 }
 
 .form-item p {
     font-size: calc(6px + 2vmin);
+}
+
+@media only screen and (max-width: 1140px ) {
+    .form{
+        
+    }
+}
+
+@media only screen and (max-width: 700px ) {
+    .form{
+        flex-direction: column;
+    }
 }
