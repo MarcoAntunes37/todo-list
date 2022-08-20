@@ -81,8 +81,10 @@ export default function Form() {
             <p>End time</p>
             <input ref={end} type='time'/>
         </div>
-        <button onClick={newTask}>Add</button>
-        <button onClick={clearTaskOutput}>Clear</button>
+        <div className='form-button'>
+            <button onClick={newTask}>Add</button>
+            <button onClick={clearTaskOutput}>Clear</button>
+        </div>        
     </form>
   )
 }
