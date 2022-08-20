@@ -20,7 +20,7 @@ export default function TodoList() {
     useEffect(() => { 
         getAllTasks() 
          
-    } , [getAllTasks, task])
+    } , [getAllTasks])
 
    
 
