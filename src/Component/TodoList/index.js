@@ -5,17 +5,20 @@ export default function TodoList() {
     const url = 'https://todo-list-api-marcoantunes37.vercel.app/api/lists/'
     const [task, setTask] = useState([])    
     
-    const getAllTasks = useCallback(
-      async () => {        
-            const response = await fetch(url, {
-              method: 'get',
-              headers: {'Access-Control-Allow-Origin': 'https://todo-list-marcoantunes37.vercel.app'}
-            })
-            const responseJSON = await response.json();
-            setTask(responseJSON)
-            return responseJSON
+    // const getAllTasks = useCallback(
+    //   async () => {        
+            
                       
-      },[])
+    //   },[])
+    useEffect(() => {
+      const response = await fetch(url, {
+        method: 'get',
+        headers: {'Access-Control-Allow-Origin': 'https://todo-list-marcoantunes37.vercel.app'}
+      })
+      const responseJSON = await response.json();
+      setTask(responseJSON)
+      return responseJSON
+    }, [task])
 
     useEffect(() => { 
         getAllTasks() 
