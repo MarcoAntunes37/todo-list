@@ -60,7 +60,7 @@ export default function Form() {
                 <input ref={end} type='time'/>
             </div>
             <div className='form-button'>
-                <button type="submit" onClick={() => handleAddClick}>Add</button>
+                <button type="submit" onClick={handleAddClick}>Add</button>
                 <button type='reset'>Clear</button>
             </div>        
         </form>
