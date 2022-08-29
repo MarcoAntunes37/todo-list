@@ -1,37 +1,39 @@
-import React, {useEffect, useState, useCallback} from 'react'
+import React from 'react'
 import TaskItem from '../TaskItem'
+import {useQuery} from '@tanstack/react-query'
+import axios from 'axios'
 
 export default function TodoList() {
-    const url = 'https://todo-list-api-marcoantunes37.vercel.app/api/lists/'
-    const [task, setTask] = useState([])    
-    
-    // const getAllTasks = useCallback(
-    //   async () => {        
-            
-                      
-    //   },[])
-    useEffect(() => {
-      const response = await fetch(url, {
-        method: 'get',
-        headers: {'Access-Control-Allow-Origin': 'https://todo-list-marcoantunes37.vercel.app'}
-      })
-      const responseJSON = await response.json();
-      setTask(responseJSON)
-      return responseJSON
-    }, [task])
+    const options = {
+      url: 'http://localhost:8090/api/lists',
+      method: 'GET',
+      headers: {
+        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Origin": "*"
+      }
+    }
+    const {isLoading, error, data} = useQuery(['todo'], () => axios(options)
+    .then((response) => {
+      return response
+    }))
 
-    useEffect(() => { 
-        getAllTasks() 
-         
-    } , [getAllTasks])
+    if (isLoading) return "Loading...";
 
-   
+    if (error) return "An error has occurred: " + error.message;
 
   return (
     <div>
-        {task.map((item) => {
-            return <TaskItem item={item}/>
-        })}
+      {data
+        .data
+        ?.map(item => {
+          return (
+              <TaskItem 
+                item={item}
+                key={item._id}
+              />
+            )
+          })    
+      }
     </div>
   )
 }

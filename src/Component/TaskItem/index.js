@@ -1,11 +1,36 @@
 import React, {useState, useRef} from 'react'
+import updateTaskData from '../../utils/updateTaskData'
+import deleteTaskData from '../../utils/deleteTaskData'
+import { useQueryClient, useMutation } from '@tanstack/react-query'
 import './taskitem.css'
 
+const useUpdateTaskData = () => {    
+    const queryClient = useQueryClient()
+    return useMutation(updateTaskData, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(["todo"])
+        },
+        onError: (err) =>{
+            alert(err)
+        }
+    })
+}
+
+const useDeleteTaskData = () => {    
+    const queryClient = useQueryClient()
+    return useMutation(deleteTaskData, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(["todo"])
+        },
+        onError: (err) =>{
+            alert(err)
+        }
+    })
+}
+
 export default function TaskItem(props) {
-    const url = 'https://todo-list-api-marcoantunes37.vercel.app/api/lists'
     const [toggle, setToggle] = useState(true)
     const {_id, title, description, startTime, endTime, done} = props.item
-    const [changes, setChanges] = useState([])
     const date = new Date(props.item.date)
     const refTitle = useRef(null)
     const refDescr = useRef(null)
@@ -13,169 +38,120 @@ export default function TaskItem(props) {
     const refStart = useRef(null)
     const refEnd = useRef(null)
     const refDone = useRef(null)
+    const { mutate: updTask } = useUpdateTaskData()
+    const { mutate: delTask } = useDeleteTaskData()
 
-    const handleChange = (e) => {        
-        setChanges(prevState => {
-            return {...prevState, done: refDone.current.checked }
-        })
-    }
-
-    const handleBlur = (e) => {
-        const taskData = {
-            title: refTitle.current.value,
-            description: refDescr.current.value,
-            date: refDate.current.value,
-            startTime: refStart.current.value,
-            endTime: refEnd.current.value,
-            done: refDone.current.checked
+    const handleSaveClick = () => {
+        const task = {
+            _id: _id,
+            title: refTitle.current?.value,
+            done: refDone.current?.checked,
+            description: refDescr.current?.value,
+            date: refDate.current?.value,
+            startTime: refStart.current?.value,
+            endTime: refEnd.current?.value
         }
-        setChanges(taskData)
-    }
-
-    const fortmatResponse = (res) => {
-        return JSON.stringify(res, null, 2);
-    }
-
-    const handleDelete = async (id) => {
-        try{
-            const res = await fetch(`${url}/delete/${id}`, {
-                method: 'delete',
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-access-token": "token-value"
-                }
-            })
-            if(!res.ok){
-                const message = `Error occurrend: ${res.status}, ${res.statusText}`
-                throw new Error(message);
-            }
-        }
-        catch(err){
-            throw new Error(err)
-        }
-    }
-    
-    const handleSave = async (id) => {
+        updTask(task)
         setToggle(true)
-        try{
-            const res = await fetch(`${url}/update/${id}`, {
-                method: 'put',
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-access-token": "token-value"
-                },
-                body: JSON.stringify(changes)
-            });
-            if(!res.ok){
-                const message = `Error occurrend: ${res.status}, ${res.statusText}`
-                throw new Error(message);
-            }
-            const data = await res.json();
-            const result = {
-                status: res.status + "-" + res.statusText,
-                headers: {
-                    "Content-Type": res.headers.get("Content-Type"),
-                    "Content-Length": res.headers.get("Content-Length"),
-                  },
-                  data: data                  
-            }
-            setChanges(fortmatResponse(result))
-        }
-        catch(err){
-            setChanges(err)
-        }
     }
-    
+    const handleDeleteClick = () => {
+        delTask(_id)
+    }
+
     return (
         <div className='todo-list'>
-            <div className='item-content' key={_id} >                             
+            <div className='item-content' >                             
                 {done ? 
-                (<input 
+                (<input key={"item-done"+_id}
                     className='item-done'
                     type='checkbox' 
                     ref={refDone} 
                     defaultChecked 
-                    onChange={(e) => handleChange(e)}
-                /> )
-                : (<input 
+                    
+                />)
+                : (<input key={"item-done"+_id}
                     ref={refDone} 
                     className='item-done'
                     type='checkbox' 
-                    onChange={(e) => handleChange(e)} 
+                     
                 />)}
                 {toggle ? 
-                (<div 
+                (<div key={"item-title"+_id}
                     className='item-title' 
-                    onDoubleClick={() => setToggle(false)}>
-                        {title}
+                    onDoubleClick={() => setToggle(false)}
+                >
+                    {title}
                 </div>) : 
-                (<input 
+                (<input key={"item-title"+_id}
                     className='item-title' 
                     type="text" 
                     defaultValue={title} 
-                    ref={refTitle} 
-                    onBlur={(e) => handleBlur(e)}
+                    ref={refTitle}                    
+                    
                 />)}
                 {toggle ? 
-                (<div 
+                (<div key={"item-description"+_id}
                     className='item-description' 
-                    onDoubleClick={() => setToggle(false)}>
-                        {description}
+                    onDoubleClick={() => setToggle(false)}
+                >
+                    {description}
                 </div>) : 
-                (<input 
+                (<input key={"item-description"+_id}
                     className='item-description' 
                     type="text" 
                     defaultValue={description} 
-                    ref={refDescr}  
-                    onBlur={(e) => handleBlur(e)}
+                    ref={refDescr}
                 />)}
                 {toggle ? 
-                (<div 
+                (<div key={"item-date"+_id}
                     className='item-date' 
-                    onDoubleClick={() => setToggle(false)}>
-                        {date.toISOString().split('T', 1)}
+                    onDoubleClick={() => setToggle(false)}
+                >
+                    {date.toISOString().split('T', 1)}
                 </div>) : 
-                (<input 
+                (<input key={"item-date"+_id}
                     className='item-date' 
                     type="date" 
-                    defaultValue={date.toISOString().split('T', 1)} 
-                    ref={refDate} 
-                    onBlur={(e) => handleBlur(e)} 
+                    defaultValue={date.toISOString().split('T', 1)}
+                    ref={refDate}
                 />)}
                 {toggle ? 
-                (<div 
+                (<div key={"item-start"+_id}
                     className='item-start' 
-                    onDoubleClick={() => setToggle(false)}>
-                        {startTime}
+                    onDoubleClick={() => setToggle(false)}
+                >
+                    {startTime}
                 </div>) : 
-                (<input 
+                (<input key={"item-start"+_id}
                     className='item-start' 
                     type="time" 
                     defaultValue={startTime} 
-                    ref={refStart} onBlur={(e) => handleBlur(e)} 
+                    ref={refStart} 
                 />)}
                 {toggle ? 
-                (<div 
+                (<div key={"item-end"+_id}
                     className='item-end' 
-                    onDoubleClick={() => setToggle(false)}>
-                        {endTime}
+                    onDoubleClick={() => setToggle(false)}
+                >
+                    {endTime}
                 </div>) : 
-                (<input 
+                (<input key={"item-end"+_id}
                     className='item-end' 
                     type="time" 
                     defaultValue={endTime} 
-                    ref={refEnd} 
-                    onBlur={(e) => handleBlur(e)}
+                    ref={refEnd}                    
                 />)}
                 <div className='item-buttons'>
-                    <button 
-                    className='button-delete'
-                    onClick={() => handleDelete(_id)}>
+                    <button key={"button-delete"+_id}
+                        className='button-delete'
+                        onClick={handleDeleteClick}
+                    >
                         Delete
                     </button>
-                    <button 
-                    className='button-save'
-                    onClick={() => handleSave(props.item)}>
+                    <button key={"button-save"+_id}
+                        className='button-save'
+                        onClick={handleSaveClick}
+                    >
                         Save
                     </button>
                 </div>

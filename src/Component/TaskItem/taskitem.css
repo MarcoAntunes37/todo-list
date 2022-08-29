@@ -9,6 +9,15 @@
     margin: 0 1em 0 1rem
 }
 
+.item-content >input {
+    max-width: 9em;
+    max-height: 4em;
+}
+.item-content > input[type='time'] {
+    max-width: 6em;
+    max-height: 3em;
+}
+
 .button-save{
     background-color: green;
     color: white;
@@ -17,4 +26,20 @@
 .button-delete{
     background-color: red;
     color: white
+}
+
+@media only screen and (max-width: 1160px) {
+    .item-content{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .item-content{
+        flex-direction: column;
+    }
+    .item-done, .item-title, .item-description, .item-date, .item-start, .item-end{
+        margin-top:1em;
+    }
 }
