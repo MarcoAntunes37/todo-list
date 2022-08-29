@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function addTaskData(task){
+export default async function addTaskData(task){
     const options = {
         url: 'https://todo-list-api-psi.vercel.app/api/lists/new',
         method: 'POST',
@@ -10,5 +10,5 @@ export default function addTaskData(task){
         },
         data: task
     }
-    return axios(options)
+    return await axios(options)
 }

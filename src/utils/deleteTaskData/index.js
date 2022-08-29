@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function deleteTaskData(task){
+export default async function deleteTaskData(task){
     const options = {
         url: `https://todo-list-api-psi.vercel.app/api/lists/delete/${task}`,        
         method: 'delete',
@@ -9,5 +9,5 @@ export default function deleteTaskData(task){
             "Access-Control-Allow-Origin": "*"
         }
     }    
-    return axios(options)
+    return await axios(options)
 }
