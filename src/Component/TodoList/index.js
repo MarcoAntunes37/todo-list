@@ -5,7 +5,7 @@ import axios from 'axios'
 
 export default function TodoList() {
     const options = {
-      url: 'http://localhost:8090/api/lists',
+      url: 'https://todo-list-api-psi.vercel.app/api/lists',
       method: 'GET',
       headers: {
         "Access-Control-Allow-Credentials": true,

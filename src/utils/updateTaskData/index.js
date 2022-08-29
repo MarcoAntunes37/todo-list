@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default function updateTaskData(task){
     const options = {
-        url: `http://localhost:8090/api/lists/update/${task._id}`,
+        url: `https://todo-list-api-psi.vercel.app/api/lists/update/${task._id}`,
         method: 'PUT',
         headers: {
             "Access-Control-Allow-Credentials": true,
