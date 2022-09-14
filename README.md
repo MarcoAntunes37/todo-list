@@ -38,4 +38,4 @@ on aplication folder, open console and type:
 <npm run dev / npm run build && npm start>
 ```
 
-[⬆ Voltar ao topo](#Todo List App)<br>
+[⬆ Back to top](#todo-list-app)<br>
