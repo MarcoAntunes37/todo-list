@@ -2,7 +2,7 @@
 
 <img src="imagem_2022-09-14_091731210.png" alt="exemplo imagem">
 
-> A todo list app who consumes an api
+> A todo list app that consumes an api
 
 ### Adjust and enchancement
 
