@@ -2,7 +2,7 @@
 
 <img src="imagem_2022-09-14_091731210.png" alt="exemplo imagem">
 
-> A pokedex app created with base on data from PokeApiV2 with pagination and information about you favorite Pokemons
+> A todo list app who consumes an api
 
 ### Adjust and enchancement
 
